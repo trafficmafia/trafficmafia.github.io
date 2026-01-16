@@ -3,50 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GNN // THE SYNDICATE</title>
+    <title>THE TRAFFIC MAFIA // LEGENDS ONLY</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=JetBrains+Mono:wght@400;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary: #1877f2; --bg: #050a10; --card: #0f151f; --text: #fff; --accent: #ffd814; }
+        :root {
+            --primary: #dc2626; /* Mafia Red */
+            --bg: #050505;
+            --card-bg: #111;
+            --text: #e5e5e5;
+            --border: #262626;
+            --gold: #d4af37;
+        }
+
         body { margin: 0; background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; overflow-x: hidden; }
-        
-        /* NAV */
-        .nav { padding: 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; }
-        .logo { font-family: 'Oswald'; font-size: 32px; letter-spacing: 2px; }
+
+        /* --- NAVIGATION --- */
+        .nav {
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-sizing: border-box;
+        }
+        .logo { font-family: 'Oswald'; font-size: 28px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
         .logo span { color: var(--primary); }
-        .status { color: #0f0; font-size: 12px; }
+        .nav-right { font-size: 11px; color: #666; letter-spacing: 1px; }
 
-        /* HERO */
-        .hero { text-align: center; padding: 80px 20px 40px; }
-        h1 { font-family: 'Oswald'; font-size: 60px; text-transform: uppercase; margin: 0; letter-spacing: 3px; }
-        .subtitle { color: #666; margin-top: 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a0505 0%, #000 70%);
+            padding-top: 80px;
+        }
+        h1 {
+            font-family: 'Oswald';
+            font-size: 10vw;
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin: 0;
+            color: transparent;
+            -webkit-text-stroke: 2px #333;
+            background: linear-gradient(to bottom, #fff, #666);
+            -webkit-background-clip: text;
+            background-clip: text;
+            opacity: 0.9;
+            letter-spacing: -2px;
+        }
+        .hero h1 span { color: var(--primary); -webkit-text-stroke: 0; background: none; -webkit-background-clip: unset; background-clip: unset; }
+        
+        .hero-sub {
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+            color: var(--gold);
+            margin-top: 20px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
 
-        /* THE MANIFESTO (THE STORY) */
-        .manifesto-section { max-width: 800px; margin: 0 auto 80px; border-left: 3px solid var(--primary); padding-left: 40px; background: linear-gradient(90deg, rgba(24,119,242,0.05) 0%, transparent 100%); padding: 30px 30px 30px 40px; }
-        .manifesto-text { font-family: 'Merriweather', serif; font-size: 17px; line-height: 1.8; color: #ccc; margin-bottom: 20px; }
-        .manifesto-text strong { color: #fff; }
-        .highlight { color: var(--primary); font-style: italic; font-weight: 700; }
+        /* --- MANIFESTO --- */
+        .manifesto-container {
+            max-width: 900px;
+            margin: -100px auto 100px; /* Overlap Hero */
+            background: #0a0a0a;
+            border: 1px solid var(--border);
+            padding: 60px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.8);
+        }
+        .manifesto-container::before {
+            content: 'TOP SECRET // EYES ONLY';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: #fff;
+            padding: 5px 20px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .story-text {
+            font-family: 'Merriweather', serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+        .story-text strong { color: #fff; font-weight: 900; }
+        .highlight { background: rgba(220, 38, 38, 0.1); color: var(--primary); padding: 0 5px; }
 
-        /* GRID */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 100px; padding: 0 20px; }
+        /* --- THE BOARD (GRID) --- */
+        .grid-section { padding: 50px 20px 150px; }
+        .section-header { text-align: center; margin-bottom: 80px; font-family: 'Oswald'; font-size: 40px; text-transform: uppercase; letter-spacing: 5px; color: #333; }
         
-        .member-card { background: var(--card); border: 1px solid #1f2937; padding: 30px; text-align: center; transition: 0.3s; position: relative; overflow: hidden; }
-        .member-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 0 30px rgba(24, 119, 242, 0.2); }
-        
-        .avatar { width: 100px; height: 100px; background: #1a202c; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 30px; color: #333; border: 2px solid #333; }
-        .member-card:hover .avatar { color: var(--primary); border-color: var(--primary); }
-        
-        .name { font-family: 'Oswald'; font-size: 24px; margin-bottom: 5px; color: #fff; }
-        .role { color: var(--primary); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
-        .motto { font-size: 12px; color: #888; font-style: italic; line-height: 1.6; border-top: 1px solid #1f2937; padding-top: 20px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* BIG CARDS */
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-        /* BACKDOOR MATRIX CANVAS */
-        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: none; pointer-events: none; opacity: 0.9; }
-        
-        .footer { text-align: center; padding: 40px; color: #333; font-size: 10px; }
-        
-        /* SECRET TRIGGER AREA */
-        #secret-trigger { cursor: help; }
+        /* --- CINEMATIC CARD --- */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px; /* ROUNDED CORNERS */
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(220, 38, 38, 0.15);
+            border-color: var(--primary);
+        }
+
+        /* 1:1 IMAGE CONTAINER (TOP HALF) */
+        .card-img-box {
+            width: 100%;
+            padding-top: 100%; /* Forces 1:1 Aspect Ratio */
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+        .card-img-box img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%); /* Cool effect */
+            transition: 0.4s;
+        }
+        .card:hover .card-img-box img {
+            filter: grayscale(0%); /* Color on hover */
+            transform: scale(1.05);
+        }
+
+        /* TEXT CONTENT */
+        .card-content { padding: 30px; text-align: center; }
+        .role-badge {
+            display: inline-block;
+            background: #222;
+            color: var(--primary);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .name {
+            font-family: 'Oswald';
+            font-size: 32px;
+            color: #fff;
+            margin: 0 0 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .motto {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        /* --- FOOTER & EASTER EGG --- */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 50px;
+            text-align: center;
+            font-size: 12px;
+            color: #444;
+            background: #000;
+        }
+        #secret-trigger { cursor: help; transition: 0.3s; }
+        #secret-trigger:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+
+        /* MATRIX CANVAS */
+        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: none; pointer-events: none; opacity: 0.95; }
+
     </style>
 </head>
 <body>
@@ -54,76 +209,99 @@
     <canvas id="matrix"></canvas>
 
     <div class="nav">
-        <div class="logo">GNN // <span>SYNDICATE</span></div>
-        <div class="status">SYSTEM_STATUS: CELEBRATION_MODE</div>
+        <div class="logo">THE <span>TRAFFIC</span> MAFIA</div>
+        <div class="nav-right">
+            <i class="fa-solid fa-lock"></i> ENCRYPTED CONNECTION
+        </div>
     </div>
 
     <div class="hero">
-        <h1>The Architects</h1>
-        <div class="subtitle">Operating from the Shadows to Own the Signal.</div>
+        <h1>WE ARE<br><span>LEGEND</span></h1>
+        <div class="hero-sub">"Silence is Luxury. Execution is Mandatory."</div>
     </div>
 
-    <div class="manifesto-section">
-        <p class="manifesto-text">
+    <div class="manifesto-container">
+        <div class="story-text">
             We didn't meet in a boardroom. We didn't meet at a startup mixer. We met in the server logs of a site that crashed because it couldn't handle the volume we threw at it.
-        </p>
-        <p class="manifesto-text">
+        </div>
+        <div class="story-text">
             While the rest of the world was fighting for crumbs on social media, we were building <strong>Pipelines</strong>. We realized that the internet isn't a library—it's a river. Most people stand on the banks with fishing poles. <span class="highlight">We decided to build the dam.</span>
-        </p>
-        <p class="manifesto-text">
+        </div>
+        <div class="story-text">
             We are the <strong>Modern Day Traffic Mafia</strong>. Our currency isn't bitcoin or dollars—it's Attention. We control where the eyes look. We control where the clicks land. And when the sun goes down, we don't do "team building exercises." We pour the Macallan 25, sit in absolute silence, and watch the real-time analytics spike like a heartbeat.
-        </p>
-        <p class="manifesto-text" style="color:var(--primary); font-family:'JetBrains Mono'; font-size:12px; margin-top:30px;">
-            // SILENCE IS LUXURY. EXECUTION IS MANDATORY. <span class="blink">_</span>
-        </p>
+        </div>
     </div>
 
-    <div class="grid">
-        
-        <div class="member-card">
-            <img src="img/frank.jpg" alt="Frank" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #333; margin-bottom:20px;">
-            <div class="name">FRANK</div>
-            <div class="role">The Chairman</div>
-            <div class="motto">"Setec Astronomy. Too many secrets."</div>
-        </div>
+    <div class="grid-section">
+        <div class="section-header">/// THE SYNDICATE ///</div>
+        <div class="grid">
 
-        <div class="member-card" style="border-color:var(--primary); background:rgba(24,119,242,0.05);">
-            <img src="img/blake.webp" alt="Blake" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #fff; margin-bottom:20px; box-shadow: 0 0 20px var(--primary);">
-            <div class="name">BLAKE NAVARRO</div>
-            <div class="role">CEO / The Architect</div>
-            <div class="motto">"Clear the runway. All-Nighter Protocol is active."</div>
-        </div>
+            <div class="card">
+                <div class="card-img-box">
+                    <img src="frank.webp" alt="Frank">
+                </div>
+                <div class="card-content">
+                    <div class="role-badge">The Chairman</div>
+                    <h2 class="name">Frank</h2>
+                    <div class="motto">"Setec Astronomy. Too many secrets."</div>
+                </div>
+            </div>
 
-        <div class="member-card">
-            <img src="img/jamie.webp" alt="Jamie" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #333; margin-bottom:20px;">
-            <div class="name">JAMIE</div>
-            <div class="role">CRO / Revenue</div>
-            <div class="motto">"If it doesn't make money, it doesn't exist."</div>
-        </div>
+            <div class="card" style="border-color: #333; box-shadow: 0 0 30px rgba(255,255,255,0.05);">
+                <div class="card-img-box">
+                    <img src="blake.webp" alt="Blake">
+                </div>
+                <div class="card-content">
+                    <div class="role-badge" style="color:#fff; background:var(--primary);">CEO / The Architect</div>
+                    <h2 class="name">Blake Navarro</h2>
+                    <div class="motto">"Clear the runway. All-Nighter Protocol is active."</div>
+                </div>
+            </div>
 
-        <div class="member-card">
-            <img src="img/jason.webp" alt="Jason" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #333; margin-bottom:20px;">
-            <div class="name">JASON</div>
-            <div class="role">CSO / Strategy</div>
-            <div class="motto">"Trick the algorithm. Stack the intent."</div>
-        </div>
+            <div class="card">
+                <div class="card-img-box">
+                    <img src="jamie.webp" alt="Jamie">
+                </div>
+                <div class="card-content">
+                    <div class="role-badge">CRO / Revenue</div>
+                    <h2 class="name">Jamie</h2>
+                    <div class="motto">"If it doesn't make money, it doesn't exist."</div>
+                </div>
+            </div>
 
-        <div class="member-card">
-            <img src="img/vlad.webp" alt="Vlad" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #333; margin-bottom:20px;">
-            <div class="name">VLAD</div>
-            <div class="role">CTO / Architecture</div>
-            <div class="motto">"Code is law. The system is stable."</div>
-        </div>
+            <div class="card">
+                <div class="card-img-box">
+                    <img src="jason.webp" alt="Jason">
+                </div>
+                <div class="card-content">
+                    <div class="role-badge">CSO / Strategy</div>
+                    <h2 class="name">Jason</h2>
+                    <div class="motto">"Trick the algorithm. Stack the intent."</div>
+                </div>
+            </div>
 
+            <div class="card">
+                <div class="card-img-box">
+                    <img src="https://picsum.photos/seed/vladtech/500/500" alt="Vlad">
+                </div>
+                <div class="card-content">
+                    <div class="role-badge">CTO / Architecture</div>
+                    <h2 class="name">Vlad</h2>
+                    <div class="motto">"Code is law. The system is stable."</div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div class="footer">
-        SECURE NODE: <span id="secret-trigger">PHX-884</span> // AUTHORIZED PERSONNEL ONLY
+        &copy; 2026 THE TRAFFIC MAFIA. ALL RIGHTS RESERVED.<br><br>
+        SECURE NODE: <span id="secret-trigger">PHX-884</span>
     </div>
 
     <script>
-        // --- JASON'S EASTER EGG (THE BACKDOOR) ---
-        // TRIGGER: Click the "PHX-884" in the footer 3 times rapidly.
+        // --- THE MATRIX BACKDOOR ---
+        // TRIGGER: Click "PHX-884" 3 times rapidly.
         
         let clicks = 0;
         const trigger = document.getElementById('secret-trigger');
@@ -141,16 +319,16 @@
             canvas.style.display = 'block';
             document.body.style.overflow = 'hidden';
             
-            // Matrix Rain Effect
+            // Matrix Rain
             let w = canvas.width = window.innerWidth;
             let h = canvas.height = window.innerHeight;
             const cols = Math.floor(w / 20) + 1;
             const ypos = Array(cols).fill(0);
 
             function matrix() {
-                ctx.fillStyle = '#0001';
+                ctx.fillStyle = '#0001'; // Fade effect
                 ctx.fillRect(0, 0, w, h);
-                ctx.fillStyle = '#0f0';
+                ctx.fillStyle = '#0f0'; // Green text
                 ctx.font = '15pt monospace';
 
                 ypos.forEach((y, ind) => {
@@ -163,17 +341,13 @@
             }
             setInterval(matrix, 50);
             
-            // Redirect to the "Vault" after 3 seconds of cool visuals
+            // Redirect to War Room
             setTimeout(() => {
-                alert("ACCESS GRANTED: WELCOME TO THE WAR ROOM.");
-                window.location.href = "/article/launchjacker.php";
+                // If this were live, it would go to your secret tool
+                alert("ACCESS GRANTED: WELCOME TO THE TRAFFIC MAFIA WAR ROOM.");
+                window.location.href = "https://geniusnewsnetwork.com/article/launchjacker.php"; 
             }, 3000);
         }
-        
-        // Blink animation for the cursor
-        const style = document.createElement('style');
-        style.innerHTML = '@keyframes blink { 50% { opacity: 0; } } .blink { animation: blink 1s step-end infinite; }';
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
