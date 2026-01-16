@@ -1,1 +1,179 @@
-hello world
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GNN // THE SYNDICATE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=JetBrains+Mono:wght@400;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #1877f2; --bg: #050a10; --card: #0f151f; --text: #fff; --accent: #ffd814; }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; overflow-x: hidden; }
+        
+        /* NAV */
+        .nav { padding: 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; }
+        .logo { font-family: 'Oswald'; font-size: 32px; letter-spacing: 2px; }
+        .logo span { color: var(--primary); }
+        .status { color: #0f0; font-size: 12px; }
+
+        /* HERO */
+        .hero { text-align: center; padding: 80px 20px 40px; }
+        h1 { font-family: 'Oswald'; font-size: 60px; text-transform: uppercase; margin: 0; letter-spacing: 3px; }
+        .subtitle { color: #666; margin-top: 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* THE MANIFESTO (THE STORY) */
+        .manifesto-section { max-width: 800px; margin: 0 auto 80px; border-left: 3px solid var(--primary); padding-left: 40px; background: linear-gradient(90deg, rgba(24,119,242,0.05) 0%, transparent 100%); padding: 30px 30px 30px 40px; }
+        .manifesto-text { font-family: 'Merriweather', serif; font-size: 17px; line-height: 1.8; color: #ccc; margin-bottom: 20px; }
+        .manifesto-text strong { color: #fff; }
+        .highlight { color: var(--primary); font-style: italic; font-weight: 700; }
+
+        /* GRID */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 100px; padding: 0 20px; }
+        
+        .member-card { background: var(--card); border: 1px solid #1f2937; padding: 30px; text-align: center; transition: 0.3s; position: relative; overflow: hidden; }
+        .member-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 0 30px rgba(24, 119, 242, 0.2); }
+        
+        .avatar { width: 100px; height: 100px; background: #1a202c; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 30px; color: #333; border: 2px solid #333; }
+        .member-card:hover .avatar { color: var(--primary); border-color: var(--primary); }
+        
+        .name { font-family: 'Oswald'; font-size: 24px; margin-bottom: 5px; color: #fff; }
+        .role { color: var(--primary); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        .motto { font-size: 12px; color: #888; font-style: italic; line-height: 1.6; border-top: 1px solid #1f2937; padding-top: 20px; }
+
+        /* BACKDOOR MATRIX CANVAS */
+        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: none; pointer-events: none; opacity: 0.9; }
+        
+        .footer { text-align: center; padding: 40px; color: #333; font-size: 10px; }
+        
+        /* SECRET TRIGGER AREA */
+        #secret-trigger { cursor: help; }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix"></canvas>
+
+    <div class="nav">
+        <div class="logo">GNN // <span>SYNDICATE</span></div>
+        <div class="status">SYSTEM_STATUS: CELEBRATION_MODE</div>
+    </div>
+
+    <div class="hero">
+        <h1>The Architects</h1>
+        <div class="subtitle">Operating from the Shadows to Own the Signal.</div>
+    </div>
+
+    <div class="manifesto-section">
+        <p class="manifesto-text">
+            We didn't meet in a boardroom. We didn't meet at a startup mixer. We met in the server logs of a site that crashed because it couldn't handle the volume we threw at it.
+        </p>
+        <p class="manifesto-text">
+            While the rest of the world was fighting for crumbs on social media, we were building <strong>Pipelines</strong>. We realized that the internet isn't a library—it's a river. Most people stand on the banks with fishing poles. <span class="highlight">We decided to build the dam.</span>
+        </p>
+        <p class="manifesto-text">
+            We are the <strong>Modern Day Traffic Mafia</strong>. Our currency isn't bitcoin or dollars—it's Attention. We control where the eyes look. We control where the clicks land. And when the sun goes down, we don't do "team building exercises." We pour the Macallan 25, sit in absolute silence, and watch the real-time analytics spike like a heartbeat.
+        </p>
+        <p class="manifesto-text" style="color:var(--primary); font-family:'JetBrains Mono'; font-size:12px; margin-top:30px;">
+            // SILENCE IS LUXURY. EXECUTION IS MANDATORY. <span class="blink">_</span>
+        </p>
+    </div>
+
+    <div class="grid">
+        
+        <div class="member-card">
+            <img src="img/frank.jpg" alt="Frank" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #333; margin-bottom:20px;">
+            <div class="name">FRANK</div>
+            <div class="role">The Chairman</div>
+            <div class="motto">"Setec Astronomy. Too many secrets."</div>
+        </div>
+
+        <div class="member-card" style="border-color:var(--primary); background:rgba(24,119,242,0.05);">
+            <img src="img/blake.webp" alt="Blake" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #fff; margin-bottom:20px; box-shadow: 0 0 20px var(--primary);">
+            <div class="name">BLAKE NAVARRO</div>
+            <div class="role">CEO / The Architect</div>
+            <div class="motto">"Clear the runway. All-Nighter Protocol is active."</div>
+        </div>
+
+        <div class="member-card">
+            <img src="img/jamie.webp" alt="Jamie" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #333; margin-bottom:20px;">
+            <div class="name">JAMIE</div>
+            <div class="role">CRO / Revenue</div>
+            <div class="motto">"If it doesn't make money, it doesn't exist."</div>
+        </div>
+
+        <div class="member-card">
+            <img src="img/jason.webp" alt="Jason" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #333; margin-bottom:20px;">
+            <div class="name">JASON</div>
+            <div class="role">CSO / Strategy</div>
+            <div class="motto">"Trick the algorithm. Stack the intent."</div>
+        </div>
+
+        <div class="member-card">
+            <img src="img/vlad.webp" alt="Vlad" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #333; margin-bottom:20px;">
+            <div class="name">VLAD</div>
+            <div class="role">CTO / Architecture</div>
+            <div class="motto">"Code is law. The system is stable."</div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        SECURE NODE: <span id="secret-trigger">PHX-884</span> // AUTHORIZED PERSONNEL ONLY
+    </div>
+
+    <script>
+        // --- JASON'S EASTER EGG (THE BACKDOOR) ---
+        // TRIGGER: Click the "PHX-884" in the footer 3 times rapidly.
+        
+        let clicks = 0;
+        const trigger = document.getElementById('secret-trigger');
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        trigger.addEventListener('click', () => {
+            clicks++;
+            if(clicks === 3) {
+                activateGodMode();
+            }
+        });
+
+        function activateGodMode() {
+            canvas.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Matrix Rain Effect
+            let w = canvas.width = window.innerWidth;
+            let h = canvas.height = window.innerHeight;
+            const cols = Math.floor(w / 20) + 1;
+            const ypos = Array(cols).fill(0);
+
+            function matrix() {
+                ctx.fillStyle = '#0001';
+                ctx.fillRect(0, 0, w, h);
+                ctx.fillStyle = '#0f0';
+                ctx.font = '15pt monospace';
+
+                ypos.forEach((y, ind) => {
+                    const text = String.fromCharCode(Math.random() * 128);
+                    const x = ind * 20;
+                    ctx.fillText(text, x, y);
+                    if (y > 100 + Math.random() * 10000) ypos[ind] = 0;
+                    else ypos[ind] = y + 20;
+                });
+            }
+            setInterval(matrix, 50);
+            
+            // Redirect to the "Vault" after 3 seconds of cool visuals
+            setTimeout(() => {
+                alert("ACCESS GRANTED: WELCOME TO THE WAR ROOM.");
+                window.location.href = "/article/launchjacker.php";
+            }, 3000);
+        }
+        
+        // Blink animation for the cursor
+        const style = document.createElement('style');
+        style.innerHTML = '@keyframes blink { 50% { opacity: 0; } } .blink { animation: blink 1s step-end infinite; }';
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
